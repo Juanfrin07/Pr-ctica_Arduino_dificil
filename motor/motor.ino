@@ -1,22 +1,26 @@
+/*JUAN FRANCISCO CORTÉS MARTINEZ(practica Arduino:Coche controlado por Bluetooth)
+    El proyecto consiste en controlar mediante el móvil un coche, conectandolos mediante un módulo Bluetooth */
+
+
 char variable = 0 ;
 
-//Motor A
+//Declaramos las conexiones del Motor A
 int ENA = 10;
 int IN1 = 9;
 int IN2 = 8;
 
-// Motor B
+//Declaramos las conexiones del Motor B
 int ENB = 5;
 int IN3 = 7;
 int IN4 = 6;
 
-//Intermitentes
+//Declaramos las conexiones de los intermitentes
 int inter_d_i = 13;
 int inter_d_d = 2;
 int inter_t_i = 3;
 int inter_t_d = 4;
 
-//Luces
+//Declaramos las conexiones de las luces
 int luz_d = A3;
 int luz_t = A5;
 
@@ -39,19 +43,22 @@ void setup ()
   pinMode (inter_t_d, OUTPUT);
   pinMode (luz_d, OUTPUT);
   pinMode (luz_t, OUTPUT);
+  
+  //Declaramos que vamos a usar el Monitor Serie
   Serial.begin(57600);
   mySerial.begin(9600);
 }
 
 
 void loop ()
+//Declaramos que si esta disponible la conexión Bluetooth que envie al Monitor Serie lo que reciba
 {
   if (mySerial.available()) {
     variable = mySerial.read();
     Serial.print(variable);
   }
 
-
+//Declaramos las funciones que debe realizar según reciba una letra u otra
   switch (variable) {
 
     case 'a':
@@ -192,6 +199,7 @@ void loop ()
 
 }
 
+//Declaramos las funciones: Adelante, Atras, Derecha, Izquierda y Parar
 
 void Adelante ()
 {
